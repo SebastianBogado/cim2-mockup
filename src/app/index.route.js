@@ -24,7 +24,7 @@
       .state('main.shelf', {
         url: 'pasillo/:id',
         templateUrl: 'app/main/shelf/shelf.html',
-        controller: 'LaneController',
+        controller: 'ShelfController',
         controllerAs: 'shelf'
       })
       .state('main.package', {
