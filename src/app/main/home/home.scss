@@ -1,0 +1,30 @@
+.robots {
+  $shelf-height: 80px;
+  $lane-height: 80px;
+  .shelf {
+    cursor: pointer;
+    height: $shelf-height;
+    border: 3px solid black;
+    display: flex;
+    .shelf-col {
+      text-align: center;
+      line-height: $shelf-height;
+      border: 1px solid gray;
+      flex: 1;
+    }
+  }
+
+  .lane {
+    height: $lane-height;
+    .robot {
+      cursor: pointer;
+      $robot-width: $lane-height;
+      line-height: $lane-height;
+      text-align: center;
+      width: $robot-width;
+      i {
+        font-size: 40px;
+      }
+    }
+  }
+}
