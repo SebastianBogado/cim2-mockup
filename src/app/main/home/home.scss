@@ -17,6 +17,7 @@
   .lane {
     height: $lane-height;
     .robot {
+      position: relative;
       cursor: pointer;
       $robot-width: $lane-height;
       line-height: $lane-height;

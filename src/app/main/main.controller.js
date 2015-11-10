@@ -12,12 +12,12 @@
     vm.packages = [];
     vm.robots = [
       {id: 0, pos: 0, idle: true},
-      {id: 1, pos: 20, idle: false}
+      {id: 1, pos: 90, idle: false}
     ];
     vm.shelves = [
-      {id: 0, cols: [], rows: []},
-      {id: 1, cols: [], rows: []},
-      {id: 2, cols: [], rows: []}
+      {id: 0, colsCount: [], rows: []},
+      {id: 1, colsCount: [], rows: []},
+      {id: 2, colsCount: [], rows: []}
     ];
 
     activate();
@@ -57,6 +57,7 @@
             cell.id = k;
             cell.package = null;
             row.cells.push(cell);
+            if (j === 0) vm.shelves[i].colsCount.push(0);
           }
           vm.shelves[i].rows.push(row);
         }
@@ -70,6 +71,7 @@
         var cell = getShelfCellWithRoom(row.cells);
 
         cell.package = vm.packages[i];
+        shelf.colsCount[cell.id]++;
       }
     }
 

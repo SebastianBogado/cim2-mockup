@@ -16,39 +16,28 @@
   <div class="panel panel-default robots">
     <div class="panel-heading">robots </div>
     <div class="panel-body">
-      <div class="shelf" ui-sref="^.shelf">
-        <div class="shelf-col">5</div>
-        <div class="shelf-col">1</div>
-        <div class="shelf-col">0</div>
-        <div class="shelf-col">3</div>
-        <div class="shelf-col">5</div>
-        <div class="shelf-col">3</div>
+      <div class="shelf" ui-sref="^.shelf({id: 0})">
+        <div class="shelf-col" ng-repeat="colCount in main.shelves[0].colsCount track by $index">{{colCount}}</div>
       </div>
       <div class="lane">
-        <div class="robot">
+        <div class="robot"
+             ng-class="{'idle': main.robots[0].idle}"
+             ng-style="{'left': main.robots[0].pos + 'px'}">
           <i class="fa fa-car"></i>
         </div>
       </div>
-      <div class="shelf">
-        <div class="shelf-col">6</div>
-        <div class="shelf-col">1</div>
-        <div class="shelf-col">3</div>
-        <div class="shelf-col">2</div>
-        <div class="shelf-col">1</div>
-        <div class="shelf-col">0</div>
+      <div class="shelf" ui-sref="^.shelf({id: 1})">
+        <div class="shelf-col" ng-repeat="colCount in main.shelves[1].colsCount track by $index">{{colCount}}</div>
       </div>
       <div class="lane">
-        <div class="robot">
+        <div class="robot"
+             ng-class="{'idle': main.robots[1].idle}"
+             ng-style="{'left': main.robots[1].pos + 'px'}">
           <i class="fa fa-car"></i>
         </div>
       </div>
-      <div class="shelf">
-        <div class="shelf-col">0</div>
-        <div class="shelf-col">0</div>
-        <div class="shelf-col">1</div>
-        <div class="shelf-col">2</div>
-        <div class="shelf-col">4</div>
-        <div class="shelf-col">6</div>
+      <div class="shelf" ui-sref="^.shelf({id: 2})">
+        <div class="shelf-col" ng-repeat="colCount in main.shelves[2].colsCount track by $index">{{colCount}}</div>
       </div>
     </div>
   </div>
