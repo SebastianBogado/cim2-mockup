@@ -14,52 +14,17 @@
 </div>
 <div class="col-xs-9">
   <div class="panel panel-default shelf-view">
-    <div class="panel-heading">robots </div>
+    <div class="panel-heading">Pasillo </div>
     <div class="panel-body">
       <div class="shelf">
-        <div class="shelf-row">
-          <div class="shelf-cell">
-            <div class="package" ui-sref="main.package">
+        <div class="shelf-row" ng-repeat="row in shelf.rows">
+          <div class="shelf-cell" ng-repeat="cell in row.cells">
+            <div class="package"
+                 ng-show="cell.package"
+                 ui-sref="main.package({id: cell.package.id})">
               <i class="fa fa-archive"></i>
             </div>
           </div>
-          <div class="shelf-cell"></div>
-          <div class="shelf-cell"></div>
-          <div class="shelf-cell"></div>
-          <div class="shelf-cell"></div>
-          <div class="shelf-cell"></div>
-        </div>
-        <div class="shelf-row">
-          <div class="shelf-cell"></div>
-          <div class="shelf-cell"></div>
-          <div class="shelf-cell"></div>
-          <div class="shelf-cell"></div>
-          <div class="shelf-cell"></div>
-          <div class="shelf-cell"></div>
-        </div>
-        <div class="shelf-row">
-          <div class="shelf-cell"></div>
-          <div class="shelf-cell"></div>
-          <div class="shelf-cell"></div>
-          <div class="shelf-cell"></div>
-          <div class="shelf-cell"></div>
-          <div class="shelf-cell"></div>
-        </div>
-        <div class="shelf-row">
-          <div class="shelf-cell"></div>
-          <div class="shelf-cell"></div>
-          <div class="shelf-cell"></div>
-          <div class="shelf-cell"></div>
-          <div class="shelf-cell"></div>
-          <div class="shelf-cell"></div>
-        </div>
-        <div class="shelf-row">
-          <div class="shelf-cell"></div>
-          <div class="shelf-cell"></div>
-          <div class="shelf-cell"></div>
-          <div class="shelf-cell"></div>
-          <div class="shelf-cell"></div>
-          <div class="shelf-cell"></div>
         </div>
       </div>
     </div>

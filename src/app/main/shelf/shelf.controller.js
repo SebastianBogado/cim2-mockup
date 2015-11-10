@@ -6,9 +6,10 @@
     .controller('ShelfController', ShelfController);
 
   /** @ngInject */
-  function ShelfController() {
+  function ShelfController($scope, $stateParams) {
     var vm = this;
 
+    angular.extend(vm, $scope.main.shelves[$stateParams.id]);
 
     activate();
 
