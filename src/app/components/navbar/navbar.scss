@@ -1,3 +1,16 @@
 .acme-navbar-text{
   color: white;
 }
+
+.navbar-brand {
+  padding: 8px 15px;
+  img {
+    width: 32px;
+  }
+  &:hover {
+    img {
+      background-color: darkcyan;
+      border-radius: 5px;
+    }
+  }
+}
