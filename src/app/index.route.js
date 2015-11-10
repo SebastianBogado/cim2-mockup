@@ -8,6 +8,10 @@
   /** @ngInject */
   function routerConfig($stateProvider, $urlRouterProvider) {
     $stateProvider
+      .state('about', {
+        url: '/about',
+        templateUrl: 'app/about/about.html',
+      })
       .state('main', {
         url: '/',
         abstract: true,
