@@ -3,7 +3,9 @@
     <div class="panel-heading">Robots</div>
     <div class="panel-body">
       <accordion >
-        <accordion-group class="robot" heading="Robot {{robot.id}}" ng-repeat="robot in main.robots">
+        <accordion-group class="robot" heading="Robot {{robot.id}}" ng-repeat="robot in main.robots"
+                         ng-mouseenter="robot.mouseHover = true"
+                         ng-mouseleave="robot.mouseHover = false">
           <form class="form-horizontal">
             <div class="form-group input-sm row">
               <label class="col-sm-5 control-label">Estado</label>
@@ -38,9 +40,16 @@
       </div>
       <div class="lane">
         <div class="robot"
-             ng-class="{'idle': main.robots[0].idle}"
+             ng-class="{
+               'broken': main.robots[0].broken,
+               'idle': main.robots[0].idle,
+               'retrieving': main.robots[0].retrieving,
+               'storing': main.robots[0].storing,
+               'hover': main.robots[0].mouseHover,
+             }"
              ng-style="{'left': main.robots[0].pos + 'px'}">
           <i class="fa fa-car"></i>
+          <i class="fa fa-archive" ng-show="main.robots[0].package"></i>
         </div>
       </div>
       <div class="shelf" ui-sref="^.shelf({id: 1})">
@@ -48,9 +57,16 @@
       </div>
       <div class="lane">
         <div class="robot"
-             ng-class="{'idle': main.robots[1].idle}"
+             ng-class="{
+               'broken': main.robots[1].broken,
+               'idle': main.robots[1].idle,
+               'retrieving': main.robots[1].retrieving,
+               'storing': main.robots[1].storing,
+               'hover': main.robots[1].mouseHover,
+             }"
              ng-style="{'left': main.robots[1].pos + 'px'}">
           <i class="fa fa-car"></i>
+          <i class="fa fa-archive" ng-show="main.robots[1].package"></i>
         </div>
       </div>
       <div class="shelf" ui-sref="^.shelf({id: 2})">

@@ -29,8 +29,42 @@
       line-height: $lane-height;
       text-align: center;
       width: $robot-width;
-      i {
+      i.fa-car {
         font-size: 40px;
+      }
+      i.fa-archive {
+        font-size: 14px;
+        position: absolute;
+        top: 7px;
+      }
+
+      &.hover, &:hover {
+        text-shadow: 0px 0px 30px yellow;
+      }
+
+      &.broken {
+        color: red;
+        &.hover, &:hover {
+          text-shadow: 0px 0px 30px red;
+        }
+      }
+
+      &.idle {
+
+      }
+
+      &.retrieving {
+        color: green;
+        &.hover, &:hover {
+          text-shadow: 0px 0px 30px green;
+        }
+      }
+
+      &.storing {
+        color: green;
+        &.hover, &:hover {
+          text-shadow: 0px 0px 30px green;
+        }
       }
     }
   }
