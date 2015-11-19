@@ -2,6 +2,33 @@
   .robot .form-group {
     margin-bottom: 0;
   }
+  .menu {
+    .form-group {
+      height: 60px;
+
+      .control-label {
+        text-align: left;
+      }
+      .text {
+        height: 34px;
+        > div {
+          padding: 0;
+        }
+        p {
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
+        .toggle-edit {
+          line-height: 32px;
+          text-align: center;
+          i {
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
 }
 
 .robots {

@@ -15,6 +15,8 @@
 
     vm.stringifyRobotState = stringifyRobotState;
 
+    vm.email = 'someone@mail.com';
+
     activate();
 
     function activate() {
