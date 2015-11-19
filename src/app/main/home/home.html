@@ -56,7 +56,7 @@
     <div class="panel-heading">Planta</div>
     <div class="panel-body">
       <div class="shelf" ui-sref="^.shelf({id: 0})">
-        <div class="shelf-col" ng-repeat="colCount in main.shelves[0].colsCount track by $index">{{colCount}}</div>
+        <div class="shelf-col" ng-id="shelfCol + $index" ng-repeat="colCount in main.shelves[0].colsCount track by $index">{{colCount}}</div>
       </div>
       <div class="lane">
         <div class="robot"

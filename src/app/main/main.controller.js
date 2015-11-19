@@ -19,6 +19,8 @@
 
     // Demo
     vm.toggleRobotBrokenStatus = dataGenerator.toggleRobotBrokenStatus;
+    vm.createPackage = dataGenerator.createPackage;
+    vm.retrievePackage = dataGenerator.retrievePackage;
 
     activate();
 

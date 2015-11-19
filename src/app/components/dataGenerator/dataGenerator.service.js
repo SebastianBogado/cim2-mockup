@@ -6,7 +6,7 @@
     .factory('dataGenerator', dataGenerator);
 
   /** @ngInject */
-  function dataGenerator() {
+  function dataGenerator($q, $interval, $timeout) {
 
     var packages, robots, shelves;
 
@@ -15,9 +15,12 @@
       getRobots: function(){ return robots; },
       getShelves: function(){ return shelves; },
       // demo
-      toggleRobotBrokenStatus: toggleRobotBrokenStatus
+      toggleRobotBrokenStatus: toggleRobotBrokenStatus,
+      createPackage: simulatePackageArrives,
+      retrievePackage: simulatePackageLeaves
     };
 
+    var lastPackageId;
 
     init();
     generatePackages();
@@ -55,6 +58,7 @@
 
         packages.push(_package);
       }
+      lastPackageId = i;
     }
     function generateShelves() {
 
@@ -133,12 +137,185 @@
     }
 
     function shelfCellHasRoom(cell) {
-      return typeof cell.package !== 'null';
+      return cell.package === null;
+    }
+
+    function getAvailableRobot() {
+      var availableRobots= robots.filter(robotIsAvailable);
+      return randomFromList(availableRobots);
+    }
+
+    function robotIsAvailable(robot) {
+      return !robot.broken && robot.idle;
     }
 
     // Demo
     function toggleRobotBrokenStatus(robot) {
       robot.broken = !robot.broken;
+    }
+
+    function createPackage() {
+      var _package = {};
+
+      _package.id = lastPackageId++;
+      _package.ingress = new Date();
+      _package.egress = moment(_package.ingress).add(6, 'months').toDate();
+      _package.location = {};
+
+      packages.push(_package);
+      return _package;
+    }
+
+    function assignPackage() {
+      var shelf = getShelfWithRoom(shelves);
+      var row = getShelfRowfWithRoom(shelf.rows);
+      var cell = getShelfCellWithRoom(row.cells);
+
+      return {
+        shelf: shelf,
+        row: row,
+        cell: cell
+      }
+    }
+
+    function assignRobot(location) {
+      if (location.shelf.id === 0) {
+        return robots[0];
+      } else if (location.shelf.id === 2) {
+        return robots[1];
+      } else {
+        return randomFromList(robots);
+      }
+    }
+
+    function robotSetStoringStatus(robot) {
+      robot.idle = false;
+      robot.storing = true;
+      robot.retrieving = false;
+      return robot;
+    }
+
+    function robotSetRetrievingStatus(robot) {
+      robot.idle = false;
+      robot.storing = false;
+      robot.retrieving = true;
+      return robot;
+    }
+
+    function robotSetIdleStatus(robot) {
+      robot.idle = true;
+      robot.storing = false;
+      robot.retrieving = false;
+      return robot;
+    }
+
+    function robotGoToConveyor(task) {
+      var robotSpeed = 0.1,
+        intervalSpeed = 50;
+
+      var robot = task.robot;
+
+      var interval = $interval( function () {
+        if (robot.pos > 0) {
+          robot.pos -= robotSpeed * intervalSpeed;
+        }
+
+        if (robot.pos < 1) {
+          robot.pos = 0;
+          $interval.cancel(interval);
+        }
+
+      }, intervalSpeed);
+
+      return $timeout( function () {
+        return task;
+      }, robot.pos / robotSpeed);
+    }
+
+    function robotPickupPackage(task) {
+      var robotPickupSpeed = 3000;
+
+      var robot = task.robot;
+
+      return $timeout( function () {
+        robot.package = task._package;
+        return task;
+      }, robotPickupSpeed);
+    }
+
+    function robotGoToLocation(task) {
+      var robotSpeed = 0.1,
+        intervalSpeed = 50;
+
+      var robot = task.robot;
+      var shelfCol = document.getElementsByClassName('shelf-col')[0] || {};
+      var endPos = task.location.cell.id * (shelfCol.offsetWidth || 110);  // gg
+
+      var interval = $interval( function () {
+        if (robot.pos <= endPos) {
+          robot.pos += robotSpeed * intervalSpeed;
+        }
+
+        if (robot.pos > endPos) {
+          robot.pos = endPos;
+          $interval.cancel(interval);
+        }
+
+      }, intervalSpeed);
+
+      return $timeout( function () {
+        return task;
+      }, (endPos - robot.pos) / robotSpeed);
+    }
+
+    function robotStorePackageOnLocation(task) {
+      var robotStoreSpeed = 3000;
+
+      var robot = task.robot;
+      var _package = task._package;
+      var shelf = task.location.shelf;
+      var row = task.location.row;
+      var cell = task.location.cell;
+
+      return $timeout( function () {
+        robot.package = null;
+        cell.package = _package;
+        _package.location = task.location;
+        ++shelf.colsCount[cell.id];
+        return task;
+      }, robotStoreSpeed);
+    }
+
+    function robotFinishTask(task) {
+      return $timeout( function () {
+        robotSetIdleStatus(task.robot);
+      });
+    }
+
+
+    function simulatePackageArrives() {
+      var _package = createPackage();
+      var location = assignPackage(_package);
+      var robot = assignRobot(location);
+
+      robotSetStoringStatus(robot);
+
+      var task = {
+        _package: _package,
+        location: location,
+        robot: robot
+      };
+
+      robotGoToConveyor(task)
+        .then(robotPickupPackage)
+        .then(robotGoToLocation)
+        .then(robotStorePackageOnLocation)
+        .then(robotGoToConveyor)
+        .then(robotFinishTask);
+    }
+
+    function simulatePackageLeaves(_package) {
+
     }
   }
 })();

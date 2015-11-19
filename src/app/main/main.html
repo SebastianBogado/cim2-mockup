@@ -15,16 +15,16 @@
      ng-click="main.console.open = !main.console.open">Consola de simulación</div>
    <div class="console-body" ng-show="main.console.open">
      <h4>Planta</h4>
-     <div class="btn btn-primary" ng-click="createPackage()">Crear paquete</div>
+     <div class="btn btn-primary" ng-click="main.createPackage()">Crear paquete</div>
      <br/>
      <br/>
      <form class="form-inline">
-       <button type="submit" class="btn btn-primary">Retirar paquete</button> &nbsp;
+       <button type="submit" class="btn btn-primary" ng-click="main.retrievePackage(main.packageToRetrieve)">Retirar paquete</button> &nbsp;
        <div class="form-group">
          <label for="packageToRetrieve">id</label>
          <select class="form-control" id="packageToRetrieve"
                  ng-init="main.packageToRetrieve = main.packages[0]"
-                 ng-options="option.id for option in main.packages track by option.id"
+                 ng-options="option.id for option in main.packages"
                  ng-model="main.packageToRetrieve">
          </select>
        </div>
