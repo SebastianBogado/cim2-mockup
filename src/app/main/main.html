@@ -15,13 +15,19 @@
      ng-click="main.console.open = !main.console.open">Consola de simulación</div>
    <div class="console-body" ng-show="main.console.open">
      <h4>Planta</h4>
-     <div class="btn btn-primary" ng-click="main.createPackage()">Crear paquete</div>
+     <div class="btn btn-primary"
+          ng-click="main.createPackage()"
+          ng-disabled="(main.robots[0].broken || !main.robots[0].idle) &&
+                       (main.robots[1].broken || !main.robots[1].idle )">Crear paquete</div>
      <br/>
      <br/>
      <form class="form-inline">
        <button type="submit" class="btn btn-primary"
                ng-click="main.retrievePackage(main.packageToRetrieve)"
-               ng-disabled="!main.packageToRetrieve">Retirar paquete</button> &nbsp;
+               ng-disabled="!main.packageToRetrieve ||
+                            (main.robots[0].broken || !main.robots[0].idle) &&
+                            (main.robots[1].broken || !main.robots[1].idle )">
+         Retirar paquete</button> &nbsp;
        <div class="form-group">
          <label for="packageToRetrieve">id</label>
          <select class="form-control" id="packageToRetrieve"
@@ -39,7 +45,8 @@
      <div class="btn-group">
        <div class="btn btn-primary"
             ng-repeat="robot in main.robots"
-            ng-click="main.toggleRobotBrokenStatus(robot)">{{(robot.broken ? 'Arreglar' : 'Romper')}} robot {{robot.id}}</div>
+            ng-click="main.toggleRobotBrokenStatus(robot)"
+            ng-disabled="!robot.idle">{{(robot.broken ? 'Arreglar' : 'Romper')}} robot {{robot.id}}</div>
      </div>
 
     </div>
