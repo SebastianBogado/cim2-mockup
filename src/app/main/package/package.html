@@ -1,8 +1,22 @@
-<div class="col-xs-3">
-  <div class="panel panel-default">
-    <div class="panel-heading">menu</div>
+<div class="col-xs-3 quick-view">
+  <div class="panel panel-default menu">
+    <div class="panel-heading">Menú</div>
     <div class="panel-body">
-      menu content
+      <form class="form-horizontal">
+        <div class="form-group input-sm row">
+          <label class="col-sm-12 control-label">Email para enviar alertas</label>
+          <div class="text col-sm-12">
+            <div class="col-sm-9">
+              <p class="form-control-static" ng-hide="main.editingEmail">{{main.email}}</p>
+              <input type="email" class="form-control" ng-model="main.email" ng-show="main.editingEmail"/>
+            </div>
+            <div class="toggle-edit col-sm-3">
+              <i class="fa fa-edit" ng-click="main.editingEmail = true" ng-hide="main.editingEmail"></i>
+              <i class="fa fa-check" ng-click="main.editingEmail = false" ng-show="main.editingEmail"></i>
+            </div>
+          </div>
+        </div>
+      </form>
     </div>
   </div>
 </div>

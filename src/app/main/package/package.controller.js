@@ -9,13 +9,10 @@
   function PackageController($scope, $stateParams) {
     var vm = this;
 
-    angular.extend(vm, $scope.main.packages[$stateParams.id]);
-
-
     activate();
 
     function activate() {
-
+      angular.extend(vm, $scope.main.packages[$stateParams.id]);
     }
   }
 })();
