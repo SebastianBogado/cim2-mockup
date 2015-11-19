@@ -19,7 +19,9 @@
      <br/>
      <br/>
      <form class="form-inline">
-       <button type="submit" class="btn btn-primary" ng-click="main.retrievePackage(main.packageToRetrieve)">Retirar paquete</button> &nbsp;
+       <button type="submit" class="btn btn-primary"
+               ng-click="main.retrievePackage(main.packageToRetrieve)"
+               ng-disabled="!main.packageToRetrieve">Retirar paquete</button> &nbsp;
        <div class="form-group">
          <label for="packageToRetrieve">id</label>
          <select class="form-control" id="packageToRetrieve"
