@@ -66,3 +66,25 @@ $icon-font-path: "../../bower_components/bootstrap-sass/assets/fonts/bootstrap/"
     }
   }
 }
+
+.console {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding-bottom: 30px;
+  &.closed {
+    padding-bottom: 0;
+  }
+  .console-heading {
+    color: #333;
+    background-color: #f5f5f5;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-left: none;
+    border-right: none;
+    cursor: pointer;
+  }
+  .console-body {
+    padding: 15px;
+  }
+}

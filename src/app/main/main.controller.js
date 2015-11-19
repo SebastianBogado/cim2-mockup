@@ -17,6 +17,9 @@
 
     vm.email = 'someone@mail.com';
 
+    // Demo
+    vm.toggleRobotBrokenStatus = dataGenerator.toggleRobotBrokenStatus;
+
     activate();
 
     function activate() {

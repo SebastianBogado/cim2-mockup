@@ -13,7 +13,9 @@
     var service = {
       getPackages: function(){ return packages; },
       getRobots: function(){ return robots; },
-      getShelves: function(){ return shelves; }
+      getShelves: function(){ return shelves; },
+      // demo
+      toggleRobotBrokenStatus: toggleRobotBrokenStatus
     };
 
 
@@ -134,5 +136,9 @@
       return typeof cell.package !== 'null';
     }
 
+    // Demo
+    function toggleRobotBrokenStatus(robot) {
+      robot.broken = !robot.broken;
+    }
   }
 })();

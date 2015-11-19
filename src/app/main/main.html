@@ -8,3 +8,38 @@
 
   </div>
 </div>
+
+
+<div class="console" ng-init="main.console.open = true" ng-class="{'closed': !main.console.open}">
+   <div class="console-heading"
+     ng-click="main.console.open = !main.console.open">Consola de simulación</div>
+   <div class="console-body" ng-show="main.console.open">
+     <h4>Planta</h4>
+     <div class="btn btn-primary" ng-click="createPackage()">Crear paquete</div>
+     <br/>
+     <br/>
+     <form class="form-inline">
+       <button type="submit" class="btn btn-primary">Retirar paquete</button> &nbsp;
+       <div class="form-group">
+         <label for="packageToRetrieve">id</label>
+         <select class="form-control" id="packageToRetrieve"
+                 ng-init="main.packageToRetrieve = main.packages[0]"
+                 ng-options="option.id for option in main.packages track by option.id"
+                 ng-model="main.packageToRetrieve">
+         </select>
+       </div>
+     </form>
+
+     <br/>
+     <br/>
+
+     <h4>Robots</h4>
+     <div class="btn-group">
+       <div class="btn btn-primary"
+            ng-repeat="robot in main.robots"
+            ng-click="main.toggleRobotBrokenStatus(robot)">{{(robot.broken ? 'Arreglar' : 'Romper')}} robot {{robot.id}}</div>
+     </div>
+
+    </div>
+  </div>
+</div>
