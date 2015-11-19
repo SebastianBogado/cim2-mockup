@@ -10,15 +10,10 @@
     var vm = this;
 
     vm.packages = [];
-    vm.robots = [
-      {id: 0, pos: 0, idle: true},
-      {id: 1, pos: 90, idle: false}
-    ];
-    vm.shelves = [
-      {id: 0, colsCount: [], rows: []},
-      {id: 1, colsCount: [], rows: []},
-      {id: 2, colsCount: [], rows: []}
-    ];
+    vm.robots = [];
+    vm.shelves = [];
+
+    vm.stringifyRobotState = stringifyRobotState;
 
     activate();
 
@@ -27,5 +22,13 @@
       vm.robots = dataGenerator.getRobots();
       vm.shelves = dataGenerator.getShelves();
     }
+
+    function stringifyRobotState(robot) {
+      if (robot.broken)   return 'Alerta!';
+      if (robot.idle)     return 'Inactivo';
+      if (robot.retrieving)  return 'Retirando paquete';
+      if (robot.storing)  return 'Depositando paquete';
+    }
+
   }
 })();

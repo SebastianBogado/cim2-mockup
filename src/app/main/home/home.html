@@ -1,8 +1,25 @@
-<div class="col-xs-3">
+<div class="col-xs-3 quick-view">
   <div class="panel panel-default">
-    <div class="panel-heading">quick view</div>
+    <div class="panel-heading">Robots</div>
     <div class="panel-body">
-      quick view content
+      <accordion >
+        <accordion-group class="robot" heading="Robot {{robot.id}}" ng-repeat="robot in main.robots">
+          <form class="form-horizontal">
+            <div class="form-group input-sm row">
+              <label class="col-sm-5 control-label">Estado</label>
+              <div class="col-sm-7">
+                <p class="form-control-static">{{main.stringifyRobotState(robot)}}</p>
+              </div>
+            </div>
+            <div class="form-group input-sm row">
+              <label class="col-sm-5 control-label">Promedio</label>
+              <div class="col-sm-7">
+                <p class="form-control-static">{{robot.avg}}</p>
+              </div>
+            </div>
+          </form>
+        </accordion-group>
+      </accordion>
     </div>
   </div>
   <div class="panel panel-default">

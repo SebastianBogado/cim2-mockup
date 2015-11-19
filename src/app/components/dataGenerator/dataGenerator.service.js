@@ -16,6 +16,7 @@
       getShelves: function(){ return shelves; }
     };
 
+
     init();
     generatePackages();
     generateShelves();
@@ -28,8 +29,8 @@
       packages = [];
 
       robots = [
-        {id: 0, pos: 0, idle: true},
-        {id: 1, pos: 90, idle: false}
+        {id: 0, pos: 0, avg: '7m', broken: false, idle: true, retrieving: false, storing: false, package: null},
+        {id: 1, pos: 0, avg: '5m', broken: false, idle: true, retrieving: false, storing: false, package: null}
       ];
 
       shelves = [
