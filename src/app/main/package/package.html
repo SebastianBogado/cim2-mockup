@@ -8,7 +8,12 @@
 </div>
 <div class="col-xs-9">
   <div class="panel panel-default">
-    <div class="panel-heading">Paquete</div>
+    <div class="panel-heading">
+      <a ui-sref="main.home" >Planta </a>
+      >
+      <a ui-sref="main.shelf({id: package.location.shelf.id})" >Pasillo {{package.location.shelf.id}}</a>
+      > Paquete {{package.id}}
+    </div>
     <div class="panel-body">
       <form class="form-horizontal">
         <div class="form-group">

@@ -14,7 +14,9 @@
 </div>
 <div class="col-xs-9">
   <div class="panel panel-default shelf-view">
-    <div class="panel-heading">Pasillo </div>
+    <div class="panel-heading">
+      <a ui-sref="main.home" >Planta </a>
+      > Pasillo {{shelf.id}}</div>
     <div class="panel-body">
       <div class="shelf">
         <div class="shelf-row" ng-repeat="row in shelf.rows">

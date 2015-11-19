@@ -48,6 +48,7 @@
         _package.id = i;
         _package.ingress = randomDate(sixMonthsAgoSubSevenDays, sixMonthsAgoPlusSevenDays);
         _package.egress = moment(_package.ingress).add(6, 'months').toDate();
+        _package.location = {};
 
         packages.push(_package);
       }
@@ -81,6 +82,11 @@
         var cell = getShelfCellWithRoom(row.cells);
 
         cell.package = packages[i];
+        packages[i].location = {
+          shelf: shelf,
+          row: row,
+          cell: cell
+        };
         shelf.colsCount[cell.id]++;
       }
     }
