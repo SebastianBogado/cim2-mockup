@@ -239,6 +239,11 @@
 
       return $timeout( function () {
         robot.package = task._package;
+        if (task._package.location && task._package.location.cell) {
+          task._package.location.cell.package = null;
+          task._package.location.shelf.colsCount[task._package.location.cell.id]--;
+          task._package.location = {};
+        }
         return task;
       }, robotPickupSpeed);
     }
@@ -286,10 +291,28 @@
       }, robotStoreSpeed);
     }
 
+    function robotLeavePackageOnConveyor(task) {
+      var robotStoreSpeed = 3000;
+
+      var robot = task.robot;
+      var _package = task._package;
+      var shelf = task.location.shelf;
+      var row = task.location.row;
+      var cell = task.location.cell;
+
+      return $timeout( function () {
+        robot.package = null;
+        packages.splice(packages.indexOf(_package), 1);
+        return task;
+      }, robotStoreSpeed);
+    }
+
+
+
     function robotFinishTask(task) {
       return $timeout( function () {
         robotSetIdleStatus(task.robot);
-      });
+      })
     }
 
 
@@ -315,7 +338,22 @@
     }
 
     function simulatePackageLeaves(_package) {
+      var location = _package.location;
+      var robot = assignRobot(location);
 
+      robotSetRetrievingStatus(robot);
+
+      var task = {
+        _package: _package,
+        location: location,
+        robot: robot
+      };
+
+      robotGoToLocation(task)
+        .then(robotPickupPackage)
+        .then(robotGoToConveyor)
+        .then(robotLeavePackageOnConveyor)
+        .then(robotFinishTask);
     }
   }
 })();
